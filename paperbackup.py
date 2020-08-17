@@ -40,12 +40,26 @@ from pyx import *
 
 # constants for the size and layout of the barcodes on page
 max_bytes_in_barcode = 140
-barcodes_per_page = 6
-barcode_height = 8
-barcode_x_positions = [1.5, 11, 1.5, 11, 1.5, 11]
-barcode_y_positions = [18.7, 18.7, 10, 10, 1.2, 1.2]
+# barcodes_per_page = 6
+# barcode_height = 8
+# barcode_x_positions = [1.5, 11, 1.5, 11, 1.5, 11]
+# barcode_y_positions = [18.7, 18.7, 10, 10, 1.2, 1.2]
+barcodes_per_page = 20
+barcode_height = 4.4
+barcode_x_positions = [0.9,	5.8,	10.7,	15.6,
+0.9,	5.8,	10.7,	15.6,
+0.9,	5.8,	10.7,	15.6,
+0.9,	5.8,	10.7,	15.6,
+0.9,	5.8,	10.7,	15.6
+]
+barcode_y_positions = [22.4,	22.4,	22.4,	22.4,
+17.3,	17.3,	17.3,	17.3,
+12.2,	12.2,	12.2,	12.2,
+7.1,	7.1,	7.1,	7.1,
+2,	2,	2,	2
+]
 text_x_offset = 0
-text_y_offset = 8.2
+text_y_offset = barcode_height + 0.2
 
 plaintext_maxlinechars = 73
 
@@ -86,10 +100,10 @@ with open(input_path) as inputfile:
 # you really need to forbid ^, NULL and anything that could upset enscript
 allowedchars = re.compile(r"^[A-Za-z0-9/=+:., #@!()\n-]*")
 allowedmatch = allowedchars.match(ascdata)
-if allowedmatch.group() != ascdata:
-    raise RuntimeError('Illegal char found at %d >%s<'
-                       % (len(allowedmatch.group()),
-                          ascdata[len(allowedmatch.group())]))
+# if allowedmatch.group() != ascdata:
+#     raise RuntimeError('Illegal char found at %d >%s<'
+#                        % (len(allowedmatch.group()),
+#                           ascdata[len(allowedmatch.group())]))
 
 # split the ascdata into chunks of max_bytes_in_barcode size
 # each chunk begins with ^<sequence number><space>
